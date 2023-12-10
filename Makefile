@@ -1,5 +1,8 @@
 kill-port:
-	sudo kill -9 `sudo lsof -t -i:3000`
+	@sudo kill -9 `sudo lsof -t -i:3000`
 
 dev:
-	modd
+	@modd
+
+or:
+	@open `git config --get remote.origin.url`
