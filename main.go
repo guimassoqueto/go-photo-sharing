@@ -24,9 +24,7 @@ func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, message)
 }
 
-type Router struct {}
-
-func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func pathHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/":
 		homeHandler(w, r)
@@ -39,10 +37,11 @@ func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 
 func main() {
-	var router Router
+	var router http.HandlerFunc = pathHandler
+	fmt.Println("Starting server on :3000...")
 	err := http.ListenAndServe(":3000", router)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Starting server on :3000...")
+
 }
