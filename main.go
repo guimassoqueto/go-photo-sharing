@@ -37,9 +37,8 @@ func pathHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func main() {
-	var router http.HandlerFunc = pathHandler
 	fmt.Println("Starting server on :3000...")
-	err := http.ListenAndServe(":3000", router)
+	err := http.ListenAndServe(":3000", http.HandlerFunc(pathHandler))
 	if err != nil {
 		panic(err)
 	}
