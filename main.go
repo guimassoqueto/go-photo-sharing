@@ -60,11 +60,11 @@ func executeTemplate(w http.ResponseWriter, tmplPath string, data interface{}) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	executeTemplate(w, filepath.Join("templates", "home.gohtml"), nil)
+	executeTemplateMinified(w, filepath.Join("templates", "home.gohtml"), nil)
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	executeTemplate(w, filepath.Join("templates", "contact.gohtml"), nil)
+	executeTemplateMinified(w, filepath.Join("templates", "contact.gohtml"), nil)
 }
 
 type Faq struct{ Question string; Answer string }
@@ -75,7 +75,7 @@ func faqHandler(w http.ResponseWriter, r *http.Request) {
 		{"What is your favorite color?", "Blue."},
 		{"What is the airspeed velocity of an unladen swallow?", "African or European?"},
 	}
-	executeTemplate(w, filepath.Join("templates", "faq.gohtml"), struct{Data []Faq}{Data: data})
+	executeTemplateMinified(w, filepath.Join("templates", "faq.gohtml"), struct{Data []Faq}{Data: data})
 }
 
 func notFoundHandler(w http.ResponseWriter, r *http.Request) {
