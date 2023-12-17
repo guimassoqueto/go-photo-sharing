@@ -10,8 +10,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type Faq struct{ Question string; Answer string }
-
 func executeTemplate(w http.ResponseWriter, tmplPath string, data interface{}) {
 	path := filepath.Join(tmplPath)
 	tmpl, err := template.ParseFiles(path)
@@ -36,6 +34,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	executeTemplate(w, filepath.Join("templates", "contact.gohtml"), nil)
 }
 
+type Faq struct{ Question string; Answer string }
 func faqHandler(w http.ResponseWriter, r *http.Request) {
 	data := []Faq{
 		{"What is your name?", "My name is Go."},
