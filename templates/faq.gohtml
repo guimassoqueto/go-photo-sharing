@@ -1,13 +1,11 @@
+{{define "page"}}
 <h1>Frequently Asked Questions</h1>
-{{template "faq" .}}
-
-{{define "faq"}}
-    <ul>
-    {{range .}}
-        <li>
-            <h3>{{.Question}}</h3>
-            <p>{{.Answer}}</p>
-        </li>
-    {{end}}
-    </ul>
+<ul>
+{{range .}}
+    <li>
+        <h3>{{.Question}}</h3>
+        <p>{{.Answer}}</p>
+    </li>
+{{end}}
+</ul>
 {{end}}

@@ -5,22 +5,11 @@ import (
 	"gps/controllers"
 	"gps/templates"
 	"gps/views"
-	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 )
 
-
-func executeTemplate(w http.ResponseWriter, tmplPath string, data interface{}) {
-	t, err := views.Parse(tmplPath)
-	if err != nil {
-		log.Printf("parsing template failed: %v", err)
-		http.Error(w, "There was an error parsing the template", http.StatusInternalServerError)
-		return
-	}
-	t.ExecuteTemplateMinified(w, data)
-}
 
 func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 	message := "<h1>Page not found</h1>"
@@ -32,14 +21,14 @@ func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := chi.NewRouter()
 
-	r.Get("/", controllers.StaticHandler(
-		views.Must(views.ParseFS(templates.FS, "home.gohtml"))))
+	r.Get("/", controllers.StaticMinifiedHandler(
+		views.Must(views.ParseFS(templates.FS, "layout-page.gohtml", "layout-parts.gohtml", "home.gohtml"))))
 
-	r.Get("/contact", controllers.StaticHandler(
-		views.Must(views.ParseFS(templates.FS, "contact.gohtml"))))
+	r.Get("/contact", controllers.StaticMinifiedHandler(
+		views.Must(views.ParseFS(templates.FS, "layout-page.gohtml", "layout-parts.gohtml", "contact.gohtml"))))
 
 	r.Get("/faq", controllers.FAC(
-		views.Must(views.ParseFS(templates.FS, "faq.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "layout-page.gohtml", "layout-parts.gohtml", "faq.gohtml"))))
 
 	r.NotFound(notFoundHandler)
 
