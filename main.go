@@ -38,7 +38,7 @@ func main() {
 	r.Get("/contact", controllers.StaticHandler(
 		views.Must(views.ParseFS(templates.FS, "contact.gohtml"))))
 
-	r.Get("/faq", controllers.StaticHandler(
+	r.Get("/faq", controllers.FAC(
 		views.Must(views.ParseFS(templates.FS, "faq.gohtml"))))
 
 	r.NotFound(notFoundHandler)
