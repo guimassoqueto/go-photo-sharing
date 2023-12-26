@@ -11,6 +11,13 @@ import (
 	"github.com/tdewolff/minify/html"
 )
 
+func Must(t Template, err error) Template {
+	if err != nil {
+		panic(err)
+	}
+	return t
+}
+
 func Parse(filePath string) (Template, error) {
 	tmpl, err := template.ParseFiles(filePath)
 	if err != nil {
