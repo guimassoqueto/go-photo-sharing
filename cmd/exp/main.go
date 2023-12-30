@@ -16,7 +16,7 @@ type UserMeta struct {
 }
 
 func main() {
-	t, err := template.ParseFiles("hello.gohtml")
+	t, err := template.ParseFiles("hello.html")
 	if err != nil {
 		panic(err)
 	}

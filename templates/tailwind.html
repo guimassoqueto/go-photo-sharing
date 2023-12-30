@@ -1,0 +1,37 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/0f4b01b0f5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>My Website</title>
+</head>
+<body>
+    <header class="p-8 shadow-md">
+        <nav class="flex items-center">
+            <div class="pr-8">
+                <a href="/" class="pr-8 hover:text-blue-500">
+                    <i class="fa-solid fa-camera text-4xl cursor-pointer hover:text-blue-500"></i>
+                </a>
+            </div>
+            <div class="flex-grow">
+                <div>
+                    <a href="/" class="pr-8 hover:text-blue-500">Home</a>
+                    <a href="/contact" class="pr-8 hover:text-blue-500">Contact</a>
+                    <a href="/faq" class="pr-8 hover:text-blue-500">FAQ</a>
+                </div>
+            </div>
+            <div>
+                <a href="#" class="hover:text-blue-500 pr-4">Sign in</a>
+                <a href="#" class="bg-blue-600 rounded text-white p-3 hover:bg-blue-500">Sign up</a>
+            </div>
+        </nav>
+    </header>
+{{end}}
+
+<!-- Each pages contend goes here -->
+
+{{define "footer"}}
+</body>
+</html>
+{{end}}

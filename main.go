@@ -22,13 +22,13 @@ func main() {
 	r := chi.NewRouter()
 
 	r.Get("/", controllers.StaticHandler(
-		views.Must(views.ParseFS(templates.FS, "home.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "home.html", "tailwind.html"))))
 
 	r.Get("/contact", controllers.StaticHandler(
-		views.Must(views.ParseFS(templates.FS, "contact.gohtml",  "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "contact.html",  "tailwind.html"))))
 
 	r.Get("/faq", controllers.FAC(
-		views.Must(views.ParseFS(templates.FS, "faq.gohtml", "tailwind.gohtml"))))
+		views.Must(views.ParseFS(templates.FS, "faq.html", "tailwind.html"))))
 
 	r.NotFound(notFoundHandler)
 
