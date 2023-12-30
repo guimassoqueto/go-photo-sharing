@@ -21,10 +21,10 @@ func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := chi.NewRouter()
 
-	r.Get("/", controllers.StaticMinifiedHandler(
+	r.Get("/", controllers.StaticHandler(
 		views.Must(views.ParseFS(templates.FS, "layout-page.gohtml", "layout-parts.gohtml", "home.gohtml"))))
 
-	r.Get("/contact", controllers.StaticMinifiedHandler(
+	r.Get("/contact", controllers.StaticHandler(
 		views.Must(views.ParseFS(templates.FS, "layout-page.gohtml", "layout-parts.gohtml", "contact.gohtml"))))
 
 	r.Get("/faq", controllers.FAC(

@@ -5,9 +5,9 @@ import (
 	"net/http"
 )
 
-func StaticMinifiedHandler(tpl views.Template) http.HandlerFunc {
+func StaticHandler(tpl views.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		tpl.ExecuteTemplateMinified(w, nil)
+		tpl.ExecuteTemplate(w, nil)
 	}
 }
 
