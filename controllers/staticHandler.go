@@ -22,6 +22,6 @@ func FAC(tpl views.Template) http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tpl.ExecuteTemplateMinified(w, data)
+		tpl.ExecuteTemplate(w, data)
 	}
 }

@@ -1,11 +1,11 @@
-{{define "page"}}
+{{template "header" .}}
 <h1>Frequently Asked Questions</h1>
 <ul>
 {{range .}}
     <li>
-        <h3>{{.Question}}</h3>
+        <p>{{.Question}}</p>
         <p>{{.Answer}}</p>
     </li>
 {{end}}
 </ul>
-{{end}}
+{{template "footer" .}}
