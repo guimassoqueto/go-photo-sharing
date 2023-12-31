@@ -30,9 +30,10 @@ func main() {
 	r.Get("/faq", controllers.FAC(
 		views.Must(views.ParseFS(templates.FS, "faq.html", "tailwind.html"))))
 
-	r.Get("/signup", controllers.FAC(
-		views.Must(views.ParseFS(templates.FS, "signup.html", "tailwind.html"))))
-
+	usersCtrl := controllers.Users{}
+	usersCtrl.Templates.New = views.Must(views.ParseFS(templates.FS, "signup.html", "tailwind.html"))
+	r.Get("/signup", usersCtrl.New)
+	
 	r.NotFound(notFoundHandler)
 
 	fmt.Println("Starting server on http://localhost:3000")
