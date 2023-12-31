@@ -1,17 +1,16 @@
 package controllers
 
 import (
-	"gps/views"
 	"net/http"
 )
 
-func StaticHandler(tpl views.Template) http.HandlerFunc {
+func StaticHandler(tpl Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		tpl.ExecuteTemplate(w, nil)
+		tpl.Execute(w, nil)
 	}
 }
 
-func FAC(tpl views.Template) http.HandlerFunc {
+func FAC(tpl Template) http.HandlerFunc {
 	data := []struct{
 		Question string
 		Answer string
@@ -22,6 +21,6 @@ func FAC(tpl views.Template) http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tpl.ExecuteTemplate(w, data)
+		tpl.Execute(w, data)
 	}
 }

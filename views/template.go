@@ -43,7 +43,7 @@ type Template struct {
 	htmlTemplate *template.Template
 }
 
-func (t Template) ExecuteTemplate(w http.ResponseWriter, data interface{}) {
+func (t Template) Execute(w http.ResponseWriter, data interface{}) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	err := t.htmlTemplate.Execute(w, data)
 	if err != nil {
@@ -52,7 +52,7 @@ func (t Template) ExecuteTemplate(w http.ResponseWriter, data interface{}) {
 	}
 }
 
-func (t Template) ExecuteTemplateMinified(w http.ResponseWriter, data interface{}) {
+func (t Template) ExecuteMinified(w http.ResponseWriter, data interface{}) {
 	m := minify.New()
     m.AddFunc("text/html", html.Minify)
 
