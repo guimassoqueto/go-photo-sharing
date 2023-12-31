@@ -1,13 +1,15 @@
 {{template "header" .}}
-<div class="p-4">
-    <h1 class="text-4xl">Frequently Asked Questions</h1>
+<div class="mb-8">
+    <div class="mt-8 mb-8">
+        <h1 class="text-4xl">Frequently Asked Questions</h1>
+    </div>
     <ul class="list-inside space-y-2">
-    {{range .}}
+        {{range .}}
         <li class="p-2 rounded-md">
             <p class="font-bold">{{.Question}}</p>
             <p>{{.Answer}}</p>
         </li>
-    {{end}}
+        {{end}}
     </ul>
 </div>
 {{template "footer" .}}
