@@ -1,0 +1,18 @@
+{{template "header" .}}
+<div class="p-4 bg-white rounded">
+    <h1 class="text-4xl">Signup</h1>
+    <form action="/users" method="post" class="space-y-4">
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="border">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="border">
+        </div>
+        <div>
+            <input type="submit" value="Signup">
+        </div>
+    </form>
+</div>
+{{template "footer" .}}
