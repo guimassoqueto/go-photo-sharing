@@ -1,18 +1,69 @@
 {{template "header" .}}
-<div class="p-4 bg-white rounded">
-    <h1 class="text-4xl">Signup</h1>
-    <form action="/users" method="post" class="space-y-4">
+<div class="mb-8">
+    <div class="mt-8 mb-8">
+        <h1 class="text-4xl">Signup</h1>
+    </div>
+    <div class="max-w-xs">
+        <form action="/users" method="post" class="space-y-4">
+            <div class="flex flex-col">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400">
+            </div>
+            <div class="flex flex-col">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400">
+            </div>
+            <div class="flex flex-col">
+                <label for="password-confirm">Password Confirmation</label>
+                <input type="password" name="password" id="password-confirm" class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400">
+            </div>
+            <div class="flex">
+                <input type="submit" value="Signup" id="btn-submit" class="bg-blue-500 rounded text-white p-3 hover:bg-blue-600 active:bg-blue-800 cursor-pointer">
+            </div>
+        </form>
         <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" class="border">
+            <p>Already have an account? <a href="/signin" class="text-blue-500">Sign in</a></p>
+            <p>Forgot your password? <a href="/reset-pw" class="text-blue-500">Click here</a></p>
         </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="border">
-        </div>
-        <div>
-            <input type="submit" value="Signup">
-        </div>
-    </form>
+    </div>
 </div>
+<script>
+    const btnSubmit = document.getElementById('btn-submit');
+    btnSubmit.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('password-confirm').value;
+        if (email === '' || password === '' || passwordConfirm === '') {
+            alert('Please fill all fields');
+            return;
+        }
+        if (password !== passwordConfirm) {
+            alert('Password and password confirmation must be the same');
+            return;
+        }
+        const data = {
+            email,
+            password
+        };
+        fetch('/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }).then(res => res.json())
+            .then(res => {
+                if (res.error) {
+                    alert(res.error);
+                    return;
+                }
+                alert('Signup success');
+                window.location.href = '/login';
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    });
+</script>
 {{template "footer" .}}
