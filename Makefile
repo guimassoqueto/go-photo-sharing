@@ -6,3 +6,6 @@ dev:
 
 db:
 	@docker compose up -d
+
+migrate:
+	@docker compose up migrate
