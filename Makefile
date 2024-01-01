@@ -4,5 +4,5 @@ kill-port:
 dev:
 	@modd
 
-or:
-	@open `git config --get remote.origin.url`
+db:
+	@docker compose up -d
