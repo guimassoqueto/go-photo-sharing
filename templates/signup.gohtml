@@ -9,11 +9,13 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email"
                     class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400"
+                    value="{{.Email}}" {{if not .Email}}autofocus{{end}}>
             </div>
             <div class="flex flex-col">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password"
                     class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400"
+                    {{if .Email}}autofocus{{end}}>
             </div>
             <!-- <div class="flex flex-col">
                 <label for="password-confirm">Password Confirmation</label>
