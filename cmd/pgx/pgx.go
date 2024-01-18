@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"gps/models"
+
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
@@ -62,13 +64,23 @@ func main() {
 	fmt.Println("Connected!")
 
 	// create a test table
-	_, err = db.Exec(`
-		CREATE TABLE IF NOT EXISTS test (
-			id SERIAL PRIMARY KEY, name TEXT
-		);
-	`)
-	Panic(err)
-	fmt.Println("Table created!")
+	// _, err = db.Exec(`
+	// 	CREATE TABLE IF NOT EXISTS test (
+	// 		id VARCHAR(36) PRIMARY KEY, email VARCHAR(255) UNIQUE NOT NULL, password_hash TEXT NOT NULL
+	// 	);
+	// `)
+	// Panic(err)
+	// fmt.Println("Table created!")
+
+	nu := models.UserService{
+		DB: db,
+	}
+	user, error := nu.Create(&models.NewUser{
+		Email: "gaymen@gmail.com",
+		Password: "password123",
+	})
+	Panic(error)
+	fmt.Println(user)
 
 	// name := "Guilherme"
 	// row := db.QueryRow(`INSERT INTO test (name) VALUES ($1) RETURNING *;`, name)
