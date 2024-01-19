@@ -4,8 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"gps/models"
-
-	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
 type PostgresConfig struct {
@@ -48,20 +46,11 @@ type User struct {
 }
 
 func main() {
-	cfg := PostgresConfig{
-		Host:     	"localhost",
-		Port:     	5432,
-		User:    	"postgres",
-		Password: 	"postgres",
-		Database: 	"postgres",
-		sslmode:  	"disable",
-	}
+	cfg := models.DefaultPostgresConfig()
 	db, err := sql.Open("pgx", cfg.String())
 	Panic(err)
-	defer db.Close()
-	err = db.Ping() // test connection
-	Panic(err)
 	fmt.Println("Connected!")
+	defer db.Close()
 
 	// create a test table
 	// _, err = db.Exec(`
@@ -76,8 +65,8 @@ func main() {
 		DB: db,
 	}
 	user, error := nu.Create(&models.NewUser{
-		Email: "gaymen@gmail.com",
-		Password: "password123",
+		Email: "test3@gmail.com",
+		Password: "pass123",
 	})
 	Panic(error)
 	fmt.Println(user)
