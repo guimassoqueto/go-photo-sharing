@@ -7,7 +7,7 @@ import (
 
 type User struct {
 	Name string
-	Age int
+	Age  int
 	Meta UserMeta
 }
 
@@ -22,7 +22,7 @@ func main() {
 	}
 	user := User{
 		Name: "Jordi Polla",
-		Age: 29,
+		Age:  29,
 		Meta: UserMeta{
 			Visits: 12,
 		},

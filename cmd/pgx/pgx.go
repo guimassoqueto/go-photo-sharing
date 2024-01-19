@@ -65,7 +65,7 @@ func main() {
 		DB: db,
 	}
 	user, error := nu.Create(&models.NewUser{
-		Email: "test3@gmail.com",
+		Email:    "test3@gmail.com",
 		Password: "pass123",
 	})
 	Panic(error)

@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-type Users struct{
-	Templates struct{
+type Users struct {
+	Templates struct {
 		New Template
 	}
 }

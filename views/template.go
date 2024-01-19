@@ -24,9 +24,9 @@ func ParseFS(fs fs.FS, patterns ...string) (Template, error) {
 	if err != nil {
 		return Template{}, fmt.Errorf("parsing template: %w", err)
 	}
-    return Template{
-        htmlTemplate: tmpl,
-    }, nil
+	return Template{
+		htmlTemplate: tmpl,
+	}, nil
 }
 
 func Parse(filePath string) (Template, error) {
@@ -34,9 +34,9 @@ func Parse(filePath string) (Template, error) {
 	if err != nil {
 		return Template{}, fmt.Errorf("parsing template failed: %w", err)
 	}
-    return Template{
-        htmlTemplate: tmpl,
-    }, nil
+	return Template{
+		htmlTemplate: tmpl,
+	}, nil
 }
 
 type Template struct {
@@ -54,22 +54,22 @@ func (t Template) Execute(w http.ResponseWriter, data interface{}) {
 
 func (t Template) ExecuteMinified(w http.ResponseWriter, data interface{}) {
 	m := minify.New()
-    m.AddFunc("text/html", html.Minify)
+	m.AddFunc("text/html", html.Minify)
 
-    var buf bytes.Buffer
-    err := t.htmlTemplate.Execute(&buf, data)
-    if err != nil {
-        log.Printf("executing template failed: %v", err)
-        http.Error(w, "There was an error executing the template", http.StatusInternalServerError)
-        return
-    }
+	var buf bytes.Buffer
+	err := t.htmlTemplate.Execute(&buf, data)
+	if err != nil {
+		log.Printf("executing template failed: %v", err)
+		http.Error(w, "There was an error executing the template", http.StatusInternalServerError)
+		return
+	}
 
-    w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    minifiedHTML, err := m.String("text/html", buf.String())
-    if err != nil {
-        log.Printf("minifying template failed: %v", err)
-        http.Error(w, "There was an error minifying the template", http.StatusInternalServerError)
-        return
-    }
-    w.Write([]byte(minifiedHTML))
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	minifiedHTML, err := m.String("text/html", buf.String())
+	if err != nil {
+		log.Printf("minifying template failed: %v", err)
+		http.Error(w, "There was an error minifying the template", http.StatusInternalServerError)
+		return
+	}
+	w.Write([]byte(minifiedHTML))
 }

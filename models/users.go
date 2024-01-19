@@ -5,21 +5,21 @@ import (
 	"fmt"
 	"strings"
 
-	"gps/utils"
 	"golang.org/x/crypto/bcrypt"
+	"gps/utils"
 )
 
 // User represents a user in the system (password here is hashed)
 type User struct {
-	ID	   			string  `json:"id"`
-	Email   		string `json:"email"`
-	PasswordHash  	string `json:"password_hash"`
+	ID           string `json:"id"`
+	Email        string `json:"email"`
+	PasswordHash string `json:"password_hash"`
 }
 
 // NewUser represents a new user signing up (password here is plaintext)
 type NewUser struct {
-	Email  		string `json:"email"`
-	Password 	string `json:"password"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type UserService struct {
