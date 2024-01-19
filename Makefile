@@ -1,6 +1,8 @@
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := run
 .PHONY:fmt vet build
-fmt:
+clean:
+	@rm -rf bin/*
+fmt: clean
 	@go fmt ./...
 vet: fmt
 	@go vet ./...
