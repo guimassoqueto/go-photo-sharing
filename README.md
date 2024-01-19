@@ -15,7 +15,12 @@ cp .env.sample .env
 
 3. Install [Modd](https://github.com/cortesi/modd)
 
-4. Start dev
+5. Activate the pre-commit hooks (lint the code of staged changes before a commit message):
+```shell
+chmod +x .git/hooks/pre-commit
+```
+
+6. Start dev
 ```shell
 make dev
 ```
