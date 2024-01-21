@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"gps/controllers"
+	"gps/models"
 	"gps/templates"
+	"gps/utils"
 	"gps/views"
 	"net/http"
 
@@ -29,7 +31,16 @@ func main() {
 	r.Get("/faq", controllers.FAC(
 		views.Must(views.ParseFS(templates.FS, "faq.gohtml", "tailwind.gohtml"))))
 
-	usersCtrl := controllers.Users{}
+	pgConfig := models.DefaultPostgresConfig()
+	db, err := models.Open(pgConfig)
+	utils.Panic(err)
+	defer db.Close()
+	userService := models.UserService{
+		DB: db,
+	}
+	usersCtrl := controllers.Users{
+		UserService: &userService, // TODO: Inject UserService here
+	}
 	usersCtrl.Templates.New = views.Must(views.ParseFS(templates.FS, "signup.gohtml", "tailwind.gohtml"))
 	r.Get("/signup", usersCtrl.New)
 	r.Post("/users", usersCtrl.Create)
