@@ -17,13 +17,17 @@
                     class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400"
                     {{if .Email}}autofocus{{end}}>
             </div>
-            <!-- <div class="flex flex-col">
+            <div class="flex flex-col">
                 <label for="password-confirm">Password Confirmation</label>
                 <input type="password" name="password" id="password-confirm"
                     class="outline-none border border-gray-300 focus:ring-2 focus:ring-gray-400">
-            </div> -->
-            <div class="flex">
-                <input type="submit" value="Signup" id="btn-submit"
+            </div>
+            <div class="flex flex-col text-red-500">
+                <p id="email-message"></p>
+                <p id="password-message"></p>
+            </div>
+            <div class="flex" id="btn-submit-container">
+                <input type="submit" value="Signup"
                     class="bg-blue-500 rounded text-white p-3 hover:bg-blue-600 active:bg-blue-800 cursor-pointer">
             </div>
         </form>
@@ -33,4 +37,62 @@
         </div>
     </div>
 </div>
+<script>
+"use strict";
+class Signup {
+    constructor() {
+        this.email = document.getElementById("email");
+        this.password = document.getElementById("password");
+        this.passwordConfirm = document.getElementById("password-confirm");
+        this.btnSubmitContainer = document.getElementById("btn-submit-container");
+        this.emailMessageParagraph = document.getElementById("email-message");
+        this.passwordMessageParagraph = document.getElementById("password-message");
+        this.validateFields();
+    }
+    validateFields() {
+        const emailValidated = this.isEmailValid();
+        const passwordValidated = this.isPasswordValid();
+        if (emailValidated && passwordValidated) {
+            this.btnSubmitContainer.classList.remove("hidden");
+        }
+        else {
+            this.btnSubmitContainer.classList.add("hidden");
+        }
+    }
+    isEmailValid() {
+        if (!this.email.value) {
+            this.emailMessageParagraph.innerText = "Email is required";
+            return false;
+        }
+        this.emailMessageParagraph.innerText = "";
+        return true;
+    }
+    isPasswordValid() {
+        if (!this.password.value && !this.passwordConfirm.value) {
+            this.passwordMessageParagraph.innerText = "Password is required\nPassword Confirmation is required";
+            return false;
+        }
+        else if (!this.password.value) {
+            this.passwordMessageParagraph.innerText = "Password is required";
+            return false;
+        }
+        else if (!this.passwordConfirm.value) {
+            this.passwordMessageParagraph.innerText = "Password Confirmation is required";
+            return false;
+        }
+        else if (this.password.value !== this.passwordConfirm.value) {
+            this.passwordMessageParagraph.innerText = "Password != password confirmation";
+            return false;
+        }
+        this.passwordMessageParagraph.innerText = "";
+        return true;
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    new Signup();
+});
+document.addEventListener("keyup", () => {
+    new Signup();
+});
+</script>
 {{template "footer" .}}
