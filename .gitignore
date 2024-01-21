@@ -1,3 +1,6 @@
 bin
 .env
 LAST_LESSON
+frontend/dist
+node_modules
+```
