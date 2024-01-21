@@ -1,14 +1,14 @@
 package views
 
 import (
-	//"bytes"
+	"bytes"
 	"fmt"
+	"github.com/tdewolff/minify"
+	"github.com/tdewolff/minify/html"
 	"html/template"
 	"io/fs"
 	"log"
 	"net/http"
-	//"github.com/tdewolff/minify"
-	//"github.com/tdewolff/minify/html"
 )
 
 func Must(t Template, err error) Template {
@@ -51,24 +51,24 @@ func (t Template) Execute(w http.ResponseWriter, data interface{}) {
 	}
 }
 
-// func (t Template) Execute(w http.ResponseWriter, data interface{}) {
-// 	m := minify.New()
-// 	m.AddFunc("text/html", html.Minify)
+func (t Template) ExecuteMinified(w http.ResponseWriter, data interface{}) {
+	m := minify.New()
+	m.AddFunc("text/html", html.Minify)
 
-// 	var buf bytes.Buffer
-// 	err := t.htmlTemplate.Execute(&buf, data)
-// 	if err != nil {
-// 		log.Printf("executing template failed: %v", err)
-// 		http.Error(w, "There was an error executing the template", http.StatusInternalServerError)
-// 		return
-// 	}
+	var buf bytes.Buffer
+	err := t.htmlTemplate.Execute(&buf, data)
+	if err != nil {
+		log.Printf("executing template failed: %v", err)
+		http.Error(w, "There was an error executing the template", http.StatusInternalServerError)
+		return
+	}
 
-// 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-// 	minifiedHTML, err := m.String("text/html", buf.String())
-// 	if err != nil {
-// 		log.Printf("minifying template failed: %v", err)
-// 		http.Error(w, "There was an error minifying the template", http.StatusInternalServerError)
-// 		return
-// 	}
-// 	w.Write([]byte(minifiedHTML))
-// }
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	minifiedHTML, err := m.String("text/html", buf.String())
+	if err != nil {
+		log.Printf("minifying template failed: %v", err)
+		http.Error(w, "There was an error minifying the template", http.StatusInternalServerError)
+		return
+	}
+	w.Write([]byte(minifiedHTML))
+}
